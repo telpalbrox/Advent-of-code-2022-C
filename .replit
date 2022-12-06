@@ -41,7 +41,7 @@ type = "request"
 
 [debugger.interactive.launchMessage.arguments]
 MIMode = "gdb"
-arg = []
+arg = ["1"]
 cwd = "."
 environment = []
 externalConsole = false
