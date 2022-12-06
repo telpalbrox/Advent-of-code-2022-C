@@ -1,4 +1,5 @@
 #include "day1.h"
+#include "day2.h"
 #include <stdio.h>
 
 int main(int argc, char **args) {
@@ -10,6 +11,9 @@ int main(int argc, char **args) {
   switch (args[1][0]) {
   case '1':
     day1();
+    break;
+  case '2':
+    day2();
     break;
   default:
     fprintf(stderr, "Unknown day %s\n", args[1]);

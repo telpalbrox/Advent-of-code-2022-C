@@ -1,5 +1,5 @@
 compile = ["make", "-s"]
-run = "./main 1"
+run = "./main 2"
 entrypoint = "main.c"
 hidden = ["main", "main-debug", "**/*.o", "**/*.d", ".ccls-cache", "Makefile"]
 
@@ -41,7 +41,7 @@ type = "request"
 
 [debugger.interactive.launchMessage.arguments]
 MIMode = "gdb"
-arg = ["1"]
+arg = []
 cwd = "."
 environment = []
 externalConsole = false

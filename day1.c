@@ -43,6 +43,7 @@ void day1(void) {
     long calories = get_number_from_line(line);
     current_calories = current_calories + calories;
   }
+  fclose(input);
   printf("Max calories: %ld\n", max_calories);
   printf("From elf number: %ld\n", elf_with_max_calories);
   printf("Top:\n");
