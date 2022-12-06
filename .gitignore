@@ -1,3 +1,6 @@
 ./main
 .breakpoints
 .ccls-cache/
+./main-debug
+**/*.o
+**/*.d
