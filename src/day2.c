@@ -81,7 +81,7 @@ int calculate_round_outcome(char oponent_shape, char my_shape) {
 }
 
 void day2(void) {
-  FILE *input = fopen("./input2.txt", "r");
+  FILE *input = fopen("./inputs/input2.txt", "r");
   char *line;
   char buffer[100];
   int score_part_one = 0;

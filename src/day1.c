@@ -23,7 +23,7 @@ void update_top_elfs_calories(long *top_elfs_calories, long new_calories) {
 }
 
 void day1(void) {
-  FILE *input = fopen("./input1.txt", "r");
+  FILE *input = fopen("./inputs/input1.txt", "r");
   long top_elfs_calories[TOP_SIZE] = {0};
   char buffer[100];
   char *line;

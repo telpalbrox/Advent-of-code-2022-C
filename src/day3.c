@@ -26,7 +26,7 @@ char find_duplicated(char *rucksack) {
 }
 
 void day3(void) {
-  FILE *input = fopen("./input3.txt", "r");
+  FILE *input = fopen("./inputs/input3.txt", "r");
   char *line;
   char buffer[100];
   int priority_sum = 0;
