@@ -76,6 +76,7 @@ void day3(void) {
     if (group_index == RUCKSACK_GROUP_SIZE - 1) {
       char item = find_common_item(rucksack_group);
       for (size_t i = 0; i < RUCKSACK_GROUP_SIZE; i++) {
+        free(rucksack_group[i]);
       }
       common_badges_sum = common_badges_sum + get_priority_for_character(item);
     }
