@@ -1,4 +1,5 @@
 #include "day3.h"
+#include "util.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -51,13 +52,6 @@ char find_common_item(char **rucksack_group) {
     abort();
   }
   return found;
-}
-
-char *copy_str(char *str) {
-  unsigned long str_len = strlen(str);
-  char *new_str = (char *)malloc(str_len + 1);
-  strncpy(new_str, str, str_len + 1);
-  return new_str;
 }
 
 void day3(void) {
