@@ -7,3 +7,5 @@ char *copy_str(char *str) {
   strncpy(new_str, str, str_len + 1);
   return new_str;
 }
+
+long parse_number(char *str) { return strtol(str, NULL, 10); }

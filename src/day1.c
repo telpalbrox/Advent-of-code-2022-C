@@ -1,9 +1,10 @@
 #include "day1.h"
+#include "util.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-long get_number_from_line(const char *line) { return strtol(line, NULL, 10); }
+long get_number_from_line(char *line) { return parse_number(line); }
 
 int is_new_elf(const char *line) { return strlen(line) == 1; }
 
