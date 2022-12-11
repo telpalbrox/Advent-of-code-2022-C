@@ -5,12 +5,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-// buffer_index = 0
-// memset(&range_buffer, 0, sizeof range_buffer)
-
-#define reset_range_buffer()                                                   \
-  (buffer_index = 0, memset(&range_buffer, 0, sizeof range_buffer));
-
 typedef struct Range {
   int start;
   int end;
@@ -31,11 +25,33 @@ short range_fully_contains_each_other(Range *range1, Range *range2) {
   return 0;
 }
 
+short range_overlaps(Range *range1, Range *range2) {
+  if ((range1->end >= range2->start && range1->end <= range2->end) ||
+      (range1->start <= range2->end && range1->start >= range2->start)) {
+    return 1;
+  }
+  return 0;
+}
+
+short range_overlaps_each_other(Range *range1, Range *range2) {
+  if (range_fully_contains_each_other(range1, range2)) {
+    return 1;
+  }
+  if (range_overlaps(range1, range2)) {
+    return 1;
+  }
+  return 0;
+}
+
+#define reset_range_buffer()                                                   \
+  (buffer_index = 0, memset(&range_buffer, 0, sizeof range_buffer));
+
 void day4(void) {
   char buffer[100];
   char *line;
   FILE *input = fopen("./inputs/input4.txt", "r");
   int fully_contained_ranges = 0;
+  int overlapped_ranges = 0;
   while ((line = fgets(buffer, sizeof buffer, input))) {
     int buffer_index = 0;
     char range_buffer[RANGE_BUFFER_SIZE] = {0};
@@ -69,6 +85,10 @@ void day4(void) {
           fully_contained_ranges++;
           // printf(" they contain eachother");
         }
+        if (range_overlaps_each_other(&first_range, &second_range)) {
+          overlapped_ranges++;
+          // printf(" they overlap eachother");
+        }
         // printf("\n");
         break;
       }
@@ -78,4 +98,5 @@ void day4(void) {
     // printf("line: %s\n", line);
   }
   printf("fully_contained_ranges: %d\n", fully_contained_ranges);
+  printf("overlapped_ranges: %d\n", overlapped_ranges);
 }
