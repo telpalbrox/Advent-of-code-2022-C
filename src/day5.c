@@ -1,5 +1,6 @@
 #include "day5.h"
 #include "util.h"
+#include <assert.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -38,11 +39,23 @@ static void process_move(List *from, List *to, int count) {
   list_free(buffer);
 }
 
+static void process_move_9001(List *from, List *to, int count) {
+  List *buffer = list_new();
+  for (size_t i = 0; i < count; i++) {
+    list_push(buffer, list_pop(from));
+  }
+  for (int i = buffer->length - 1; i >= 0; i--) {
+    list_push(to, list_get(buffer, i));
+  }
+  list_free(buffer);
+}
+
 void day5(void) {
   List *stacks[NUMBER_COLUMNS];
   for (size_t i = 0; i < NUMBER_COLUMNS; i++) {
     stacks[i] = list_new();
   }
+  List *stacks_9001[NUMBER_COLUMNS];
   FILE *input = fopen("./inputs/input5.txt", "r");
   char *line;
   char buffer[100];
@@ -58,24 +71,45 @@ void day5(void) {
       }
       continue;
     }
-    if (line[0] == ' ' || line[0] == '\n') {
+    if (line[0] == ' ') {
+      continue;
+    }
+    if (line[0] == '\n') {
+      for (int i = 0; i < NUMBER_COLUMNS; i++) {
+        List *stack_9000 = stacks[i];
+        stacks_9001[i] = list_new();
+        List *stack_9001 = stacks_9001[i];
+        for (size_t j = 0; j < stack_9000->length; j++) {
+          list_put(stack_9001, j, list_get(stack_9000, j));
+        }
+      }
       continue;
     }
     if (line[0] == 'm') {
       int count, from, to;
       parse_move(line, &count, &from, &to);
-      process_move(stacks[from - 1], stacks[to - 1], count);
+      // process_move(stacks[from - 1], stacks[to - 1], count);
+      process_move_9001(stacks_9001[from - 1], stacks_9001[to - 1], count);
       // printf("parsed move: count %i from %i to %i\n", count, from, to);
       continue;
     }
     break;
   }
   char top_crates[NUMBER_COLUMNS + 1] = {0};
+  char top_crates_9001[NUMBER_COLUMNS + 1] = {0};
   for (int i = 0; i < NUMBER_COLUMNS; i++) {
-    printf("stack %i: ", i + 1);
+    printf("stack 9000 %i: ", i + 1);
     list_print_content_char(stacks[i]);
     top_crates[i] = (size_t)list_get_last(stacks[i]);
+    list_free(stacks[i]);
   }
-  printf("top crates: %s\n", top_crates);
+  for (int i = 0; i < NUMBER_COLUMNS; i++) {
+    printf("stack 9001 %i: ", i + 1);
+    list_print_content_char(stacks_9001[i]);
+    top_crates_9001[i] = (size_t)list_get_last(stacks_9001[i]);
+    list_free(stacks_9001[i]);
+  }
+  printf("top crates 9000: %s\n", top_crates);
+  printf("top crates 9001: %s\n", top_crates_9001);
   fclose(input);
 }

@@ -54,7 +54,10 @@ void *list_remove(List *this, size_t index) {
 
 void *list_pop(List *this) { return list_remove(this, this->length - 1); }
 
-void *list_get(List *this, size_t index) { return this->items[index]; }
+void *list_get(List *this, size_t index) {
+  assert(index < this->length);
+  return this->items[index];
+}
 
 void list_unshift(List *this, void *value) { list_put(this, 0, value); }
 
