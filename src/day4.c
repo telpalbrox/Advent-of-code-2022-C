@@ -10,14 +10,14 @@ typedef struct Range {
   int end;
 } Range;
 
-short range_fully_contains(Range *range1, Range *range2) {
+static short range_fully_contains(Range *range1, Range *range2) {
   if (range1->start <= range2->start && range1->end >= range2->end) {
     return 1;
   }
   return 0;
 }
 
-short range_fully_contains_each_other(Range *range1, Range *range2) {
+static short range_fully_contains_each_other(Range *range1, Range *range2) {
   if (range_fully_contains(range1, range2) ||
       range_fully_contains(range2, range1)) {
     return 1;
@@ -25,7 +25,7 @@ short range_fully_contains_each_other(Range *range1, Range *range2) {
   return 0;
 }
 
-short range_overlaps(Range *range1, Range *range2) {
+static short range_overlaps(Range *range1, Range *range2) {
   if ((range1->end >= range2->start && range1->end <= range2->end) ||
       (range1->start <= range2->end && range1->start >= range2->start)) {
     return 1;
@@ -33,7 +33,7 @@ short range_overlaps(Range *range1, Range *range2) {
   return 0;
 }
 
-short range_overlaps_each_other(Range *range1, Range *range2) {
+static short range_overlaps_each_other(Range *range1, Range *range2) {
   if (range_fully_contains_each_other(range1, range2)) {
     return 1;
   }
@@ -44,7 +44,7 @@ short range_overlaps_each_other(Range *range1, Range *range2) {
 }
 
 #define reset_range_buffer()                                                   \
-  (buffer_index = 0, memset(&range_buffer, 0, sizeof range_buffer));
+  (buffer_index = 0, memset(&range_buffer, 0, sizeof range_buffer))
 
 void day4(void) {
   char buffer[100];
@@ -65,17 +65,17 @@ void day4(void) {
         buffer_index++;
         continue;
       } else if (*c == '-') {
-        range_start = parse_number(range_buffer);
+        range_start = (int)parse_number(range_buffer);
         reset_range_buffer();
         continue;
       } else if (*c == ',') {
-        range_end = parse_number(range_buffer);
+        range_end = (int)parse_number(range_buffer);
         reset_range_buffer();
         first_range.start = range_start;
         first_range.end = range_end;
         continue;
       } else if (*c == '\n') {
-        range_end = parse_number(range_buffer);
+        range_end = (int)parse_number(range_buffer);
         reset_range_buffer();
         second_range.start = range_start;
         second_range.end = range_end;

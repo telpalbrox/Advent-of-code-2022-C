@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char get_shape_for_outcome(char oponent_shape, char outcome) {
+static char get_shape_for_outcome(char oponent_shape, char outcome) {
   switch (outcome) {
   case 'X': // lose
     switch (oponent_shape) {
@@ -39,7 +39,7 @@ char get_shape_for_outcome(char oponent_shape, char outcome) {
   abort();
 }
 
-int calculate_round_outcome(char oponent_shape, char my_shape) {
+static int calculate_round_outcome(char oponent_shape, char my_shape) {
   int score = 0;
   switch (my_shape) {
   case 'Y': // paper

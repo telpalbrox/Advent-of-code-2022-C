@@ -4,11 +4,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-long get_number_from_line(char *line) { return parse_number(line); }
+static long get_number_from_line(char *line) { return parse_number(line); }
 
-int is_new_elf(const char *line) { return strlen(line) == 1; }
+static int is_new_elf(const char *line) { return strlen(line) == 1; }
 
-void update_top_elfs_calories(long *top_elfs_calories, long new_calories) {
+static void update_top_elfs_calories(long *top_elfs_calories, long new_calories) {
   for (size_t index = 0; index < TOP_SIZE; index++) {
     long calories = top_elfs_calories[index];
     // printf("iterating over top_elfs_calories, %d, %ld, %ld\n", index,

@@ -4,14 +4,14 @@
 #include <stdlib.h>
 #include <string.h>
 
-int get_priority_for_character(char c) {
+static int get_priority_for_character(char c) {
   if (c >= 97) {
     return c - 96;
   }
   return c - 38;
 }
 
-char find_duplicated(char *rucksack) {
+static char find_duplicated(char *rucksack) {
   unsigned long len = strlen(rucksack);
   unsigned long half_len = len / 2;
   // printf("first half: %.*s\n", (int)half_len, rucksack);
@@ -28,7 +28,7 @@ char find_duplicated(char *rucksack) {
   return '\0';
 }
 
-char find_common_item(char **rucksack_group) {
+static char find_common_item(char **rucksack_group) {
   char *first_rucksack = rucksack_group[0];
   char found = 0;
   for (char *item = &first_rucksack[0]; *item && *item != '\n'; item++) {
