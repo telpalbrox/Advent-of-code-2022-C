@@ -20,3 +20,4 @@ void list_unshift(List *list, void *value);
 void list_print_content_char(List *list);
 void list_free(List *list);
 void *list_get_last(List *list);
+size_t list_length(List *list);

@@ -74,3 +74,5 @@ void list_print_content_char(List *this) {
   }
   puts("]");
 }
+
+size_t list_length(List *this) { return this->length; }
