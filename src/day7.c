@@ -245,28 +245,24 @@ void day7(void) {
   }
   printf("\n");
   file_system_node_print(root, 0);
-  int *count = malloc(sizeof(int));
-  *count = 0;
-  file_system_node_walk(root, (void *)count, count_size_more_than_1000);
-  printf("count: %i\n", *count);
-  free(count);
+  int count = 0;
+  file_system_node_walk(root, &count, count_size_more_than_1000);
+  printf("count: %i\n", count);
 
   int used_size = get_recursive_folder_size(root);
   int current_free_space = DISK_SPACE_AVAILABLE - used_size;
-  FindSmallestFolderToDelete *find_smallest_folder_to_delete_data =
-      malloc(sizeof(FindSmallestFolderToDelete));
-  find_smallest_folder_to_delete_data->current = NULL;
-  find_smallest_folder_to_delete_data->difference = INT_MAX;
-  find_smallest_folder_to_delete_data->current_free_space = current_free_space;
-  file_system_node_walk(root, find_smallest_folder_to_delete_data,
+  FindSmallestFolderToDelete find_smallest_folder_to_delete_data = {
+      .current = NULL,
+      .difference = INT_MAX,
+      .current_free_space = current_free_space};
+  file_system_node_walk(root, &find_smallest_folder_to_delete_data,
                         find_smallest_folder_to_delete_walker);
 
-  assert(find_smallest_folder_to_delete_data->current);
+  assert(find_smallest_folder_to_delete_data.current);
   printf(
       "Folder to delete: %s (size=%i)\n",
-      find_smallest_folder_to_delete_data->current->name,
-      get_recursive_folder_size(find_smallest_folder_to_delete_data->current));
+      find_smallest_folder_to_delete_data.current->name,
+      get_recursive_folder_size(find_smallest_folder_to_delete_data.current));
 
-  free(find_smallest_folder_to_delete_data);
   file_system_node_recurisve_free(root);
 }
