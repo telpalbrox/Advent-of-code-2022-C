@@ -42,5 +42,5 @@ void day6(void) {
     index++;
   }
   printf("index: %i, %s\n", index + 1, buffer);
+  list_free(characters);
 }
-// 1880

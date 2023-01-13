@@ -1,7 +1,7 @@
 all: main
 
 CC = clang
-override CFLAGS += -g -pthread -lm
+override CFLAGS += -g -pthread -lm -Wno-int-conversion
 
 SRCS = $(shell find src -name '.ccls-cache' -type d -prune -o -type f -name '*.c' -print)
 HEADERS = $(shell find src -name '.ccls-cache' -type d -prune -o -type f -name '*.h' -print)

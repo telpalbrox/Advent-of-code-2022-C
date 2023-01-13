@@ -4,6 +4,7 @@
 #include "day4.h"
 #include "day5.h"
 #include "day6.h"
+#include "day7.h"
 #include <stdio.h>
 
 int main(int argc, char **args) {
@@ -30,6 +31,9 @@ int main(int argc, char **args) {
     break;
   case '6':
     day6();
+    break;
+  case '7':
+    day7();
     break;
   default:
     fprintf(stderr, "Unknown day %s\n", args[1]);
